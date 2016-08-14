@@ -8,8 +8,6 @@ namespace Contextable
         //[ThreadStatic]
         //private static bool _ownsContextualizableVariable = false;
 
-        private int _thread;
-
         public Context(T obj)
         {
             //_thread = System.Threading.Thread.CurrentContext.ContextID;
