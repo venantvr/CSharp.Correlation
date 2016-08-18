@@ -1,6 +1,7 @@
 ﻿using System;
+using Contextable.Contracts;
 
-namespace CustomMassTransit
+namespace Contracts
 {
     public class YourMessage1 : IHeaders
     {

@@ -2,7 +2,7 @@ using System.Diagnostics;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 
-namespace Contextable
+namespace Contextable.Attributes
 {
     public class LoggingFilterAttribute : ActionFilterAttribute
     {

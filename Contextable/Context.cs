@@ -1,87 +1,125 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
+using Contextable.Attributes;
 
 namespace Contextable
 {
-    public class Context<T> : IDisposable where T : class, new()
+    public class Context<T> : IDisposable where T : class, IDisposable, ICloneable, new()
     {
-        [ThreadStatic] private static T _contextualizableVariable;
-        //[ThreadStatic]
-        //private static bool _ownsContextualizableVariable = false;
+        [ThreadStatic] private static ConcurrentStack<T> _scopeStack;
 
-        public Context(T obj)
+        //public static Guid TopUid
+        //{
+        //    get
+        //    {
+        //        T scope = ScopeStack.FirstOrDefault();
+
+        //        return scope != null ? scope.CurrentUid : Guid.Empty;
+        //    }
+        //}
+
+        [Description("Method #1")]
+        public Context(T input = default(T))
         {
-            //_thread = System.Threading.Thread.CurrentContext.ContextID;
+            ScopeStack.Push(input ?? CreateInstance<T>());
+        }
 
-            if (Current == default(T))
+        [Description("Method #2")]
+        public Context(params Action<T>[] ctors)
+        {
+            var defaultValue = CreateInstance<T>();
+
+            foreach (var ctor in ctors)
             {
-                _contextualizableVariable = obj;
-                //_ownsContextualizableVariable = true;
+                ctor.Invoke(defaultValue);
+            }
+
+            ScopeStack.Push(defaultValue);
+        }
+
+        private static ConcurrentStack<T> ScopeStack => _scopeStack ?? (_scopeStack = new ConcurrentStack<T>());
+
+        public static int Count => ScopeStack.Count;
+
+        public static T Parent
+        {
+            get
+            {
+                T output = null;
+
+                if (ScopeStack.Any())
+                {
+                    output = ScopeStack.ElementAtOrDefault(Depth + 1);
+                }
+
+                return output;
             }
         }
 
-        public static T Current => _contextualizableVariable;
+        public static T Current
+        {
+            get
+            {
+                //if (!ScopeStack.Any())
+                //{
+                //    var defaultValue = CreateInstance<T>();
+                //    ScopeStack.Push(defaultValue);
+                //}
+
+                T result;
+                ScopeStack.TryPeek(out result);
+                return result;
+            }
+        }
+
+        public static int Depth
+        {
+            get
+            {
+                //var current = Current;
+
+                var stack = ScopeStack.ToList();
+                var index = stack.FindIndex(c => c == Current);
+
+                return index;
+            }
+        }
 
         public void Dispose()
         {
-            //if (_ownsContextualizableVariable == true)
-            //{
-            //_contextualizableVariable = default(T);
-            //}
+            T obj;
+
+            if (ScopeStack.TryPop(out obj))
+            {
+                obj?.Dispose();
+            }
+        }
+
+        public static void Clear()
+        {
+            ScopeStack.Clear();
+        }
+
+        private static TU CreateInstance<TU>() where TU : new()
+        {
+            MemberInfo info = typeof (TU);
+
+            TU defaultValue;
+
+            if (Current != null &&
+                info.GetCustomAttributes(true).Any(t => t.GetType() == typeof (SetFromParentAttribute)))
+            {
+                defaultValue = (TU) Current.Clone();
+            }
+            else
+            {
+                defaultValue = new TU();
+            }
+
+            return defaultValue;
         }
     }
-
-    //public class Correlation
-    //{
-    //    private readonly string _id;
-
-    //    public string Value => _id;
-
-    //    public Correlation()
-    //    {
-
-    //    }
-
-    //    public Correlation(string id)
-    //    {
-    //        _id = id;
-    //    }
-    //}
-
-    //public class LoggingFilterAttribute : ActionFilterAttribute
-    //{
-    //    public override void OnActionExecuting(HttpActionContext filterContext)
-    //    {
-    //        Debug.WriteLine(Context<Correlation>.Current.Value);
-    //    }
-    //}
-
-    //public class CorrelationIdContextFilter : ActionFilterAttribute
-    //{
-    //    private Context<Correlation> _context;
-    //    private readonly string _key;
-
-    //    public CorrelationIdContextFilter(string key)
-    //    {
-    //        _key = key;
-    //    }
-
-    //    public override void OnActionExecuting(HttpActionContext actionContext)
-    //    {
-    //        IEnumerable<string> headerValues = actionContext.Request.Headers.GetValues(_key);
-
-    //        var id = headerValues.FirstOrDefault();
-
-    //        _context = new Context<Correlation>(new Correlation(id));
-    //    }
-
-    //    public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
-    //    {
-    //        if (!actionExecutedContext.Response.Headers.Contains(_key))
-    //        {
-    //            actionExecutedContext.Response.Headers.Add(_key, Context<Correlation>.Current.Value);
-    //        }
-
-    //        _context.Dispose();
-    //    }
-    //}
 }

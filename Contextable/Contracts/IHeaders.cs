@@ -1,6 +1,6 @@
 using System;
 
-namespace CustomMassTransit
+namespace Contextable.Contracts
 {
     public interface IHeaders
     {

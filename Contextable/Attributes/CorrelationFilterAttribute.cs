@@ -2,14 +2,14 @@ using System.Linq;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 
-namespace Contextable
+namespace Contextable.Attributes
 {
-    public class CorrelationIdContextFilter : ActionFilterAttribute
+    public class CorrelationFilterAttribute : ActionFilterAttribute
     {
         private readonly string _key;
         private Context<Correlation> _context;
 
-        public CorrelationIdContextFilter(string key)
+        public CorrelationFilterAttribute(string key)
         {
             _key = key;
         }

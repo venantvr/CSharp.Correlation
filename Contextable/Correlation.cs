@@ -1,6 +1,8 @@
+using System;
+
 namespace Contextable
 {
-    public class Correlation
+    public class Correlation : IDisposable, ICloneable
     {
         public Correlation()
         {
@@ -12,5 +14,15 @@ namespace Contextable
         }
 
         public string Value { get; }
+
+        public object Clone()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

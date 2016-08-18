@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Http;
 using System.Web.Http.Filters;
-using Contextable;
+using Contextable.Attributes;
 
 namespace CustomWebApi
 {
@@ -9,7 +9,7 @@ namespace CustomWebApi
     {
         public static void RegisterWebApiFilters(HttpFilterCollection filters)
         {
-            filters.Add(new CorrelationIdContextFilter(@"correlation-id"));
+            filters.Add(new CorrelationFilterAttribute(@"correlation-id"));
             filters.Add(new LoggingFilterAttribute());
         }
 

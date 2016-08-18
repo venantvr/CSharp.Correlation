@@ -1,7 +1,7 @@
 using System;
 using MassTransit;
 
-namespace MassTransitClient
+namespace CustomMassTransit
 {
     public class MyPublisher
     {
@@ -10,17 +10,17 @@ namespace MassTransitClient
         public MyPublisher()
         {
             _bus = Bus.Factory.CreateUsingRabbitMq(sbc =>
-                                                   {
-                                                       var host =
-                                                           sbc.Host(
-                                                               new Uri(
-                                                                   @"amqp://tlcswhrf:HTaEhnLDKWizDJNlWao9eLG9QDNXbp9r@white-swan.rmq.cloudamqp.com/tlcswhrf"),
-                                                               h =>
-                                                               {
-                                                                   h.Username("tlcswhrf");
-                                                                   h.Password("HTaEhnLDKWizDJNlWao9eLG9QDNXbp9r");
-                                                               });
-                                                   });
+            {
+                var host =
+                    sbc.Host(
+                        new Uri(
+                            @"amqp://tlcswhrf:HTaEhnLDKWizDJNlWao9eLG9QDNXbp9r@white-swan.rmq.cloudamqp.com/tlcswhrf"),
+                        h =>
+                        {
+                            h.Username("tlcswhrf");
+                            h.Password("HTaEhnLDKWizDJNlWao9eLG9QDNXbp9r");
+                        });
+            });
 
             _bus.Start();
         }

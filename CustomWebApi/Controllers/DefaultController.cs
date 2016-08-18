@@ -5,6 +5,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Contextable;
+using Contextable.Tools;
+using Contracts;
 using CustomMassTransit;
 
 namespace CustomWebApi.Controllers
@@ -27,9 +29,10 @@ namespace CustomWebApi.Controllers
 
             var bus = new MyPublisher();
 
-            bus.Publish(new YourMessage1 { Text = "Hi1", Date = DateTime.Now });
+            bus.Publish(new YourMessage1 {Text = "Hi1", Date = DateTime.Now});
 
-            return Request.CreateResponse(HttpStatusCode.OK, @"hello, l'identifiant de corrélation est : " + Context<Correlation>.Current.Value);
+            return Request.CreateResponse(HttpStatusCode.OK,
+                @"hello, l'identifiant de corrélation est : " + Context<Correlation>.Current.Value);
         }
 
         [HyperLink("bye")]

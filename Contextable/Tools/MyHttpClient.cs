@@ -2,7 +2,7 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-namespace Contextable
+namespace Contextable.Tools
 {
     public class MyHttpClient : HttpClient
     {

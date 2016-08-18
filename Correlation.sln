@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleWebApi", "ConsoleWebApi\ConsoleWebApi.csproj", "{D5B43CC1-F19A-45D8-BB4B-D8C45051C426}"
 EndProject
@@ -14,6 +14,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomWebApi", "CustomWebApi\CustomWebApi.csproj", "{8E1F271C-490C-4B1B-9150-21C710D245C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomMassTransit", "CustomMassTransit\CustomMassTransit.csproj", "{7C372497-AB8F-4460-A802-4630D687B49B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{90F44C36-F550-4780-A2D7-DFF01457A44B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{53D7121E-C3DB-4E0E-AB17-508B62313A1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Contextable", "Tests.Contextable\Tests.Contextable.csproj", "{B25842DC-9209-43ED-A5DE-7E12F25ED9AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +43,18 @@ Global
 		{7C372497-AB8F-4460-A802-4630D687B49B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C372497-AB8F-4460-A802-4630D687B49B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C372497-AB8F-4460-A802-4630D687B49B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90F44C36-F550-4780-A2D7-DFF01457A44B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90F44C36-F550-4780-A2D7-DFF01457A44B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90F44C36-F550-4780-A2D7-DFF01457A44B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90F44C36-F550-4780-A2D7-DFF01457A44B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53D7121E-C3DB-4E0E-AB17-508B62313A1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53D7121E-C3DB-4E0E-AB17-508B62313A1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53D7121E-C3DB-4E0E-AB17-508B62313A1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53D7121E-C3DB-4E0E-AB17-508B62313A1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B25842DC-9209-43ED-A5DE-7E12F25ED9AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B25842DC-9209-43ED-A5DE-7E12F25ED9AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B25842DC-9209-43ED-A5DE-7E12F25ED9AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B25842DC-9209-43ED-A5DE-7E12F25ED9AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,5 +63,7 @@ Global
 		{D5B43CC1-F19A-45D8-BB4B-D8C45051C426} = {FDC1D9FB-C5FD-4225-A8EA-805932FD4389}
 		{8E1F271C-490C-4B1B-9150-21C710D245C9} = {DD727AA7-4ADD-42CC-9502-C209B8515B03}
 		{7C372497-AB8F-4460-A802-4630D687B49B} = {DD727AA7-4ADD-42CC-9502-C209B8515B03}
+		{90F44C36-F550-4780-A2D7-DFF01457A44B} = {DD727AA7-4ADD-42CC-9502-C209B8515B03}
+		{53D7121E-C3DB-4E0E-AB17-508B62313A1C} = {DD727AA7-4ADD-42CC-9502-C209B8515B03}
 	EndGlobalSection
 EndGlobal
