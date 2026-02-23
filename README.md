@@ -22,4 +22,4 @@ Propage un identifiant unique (Correlation ID) à travers les couches d'une appl
 
 ## Stack
 
-C# / .NET Framework / WebApi / MassTransit / RabbitMQ
+[![Stack](https://skillicons.dev/icons?i=dotnet,rabbitmq,cs&theme=dark)](https://skillicons.dev)
